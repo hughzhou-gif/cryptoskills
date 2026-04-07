@@ -12,7 +12,7 @@ metadata:
   author: asksurf-ai
   version: "1.0"
   chain: multichain
-  category: Infrastructure
+  category: Data & Analytics
 tags:
   - market-data
   - wallet-analytics

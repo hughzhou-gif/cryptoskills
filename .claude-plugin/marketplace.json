@@ -523,7 +523,7 @@
       "name": "surf",
       "source": "./skills/surf",
       "description": "Your AI agent's crypto brain — 83+ commands across 14 data domains. Real-time prices, wallets, social intelligence, DeFi, on-chain SQL, prediction markets, and more. Natural language in, structured data out.",
-      "category": "Infrastructure"
+      "category": "Data & Analytics"
     },
     {
       "name": "surfpool",
