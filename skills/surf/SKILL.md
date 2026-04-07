@@ -7,11 +7,12 @@ description: >-
   Use whenever the user needs crypto data, asks about prices/wallets/tokens/DeFi, wants
   to investigate on-chain activity, or is building something that consumes crypto data —
   even if they don't say "surf" explicitly.
+license: Apache-2.0
 metadata:
   author: asksurf-ai
   version: "1.0"
-  chain: multi-chain
-  category: Data & Analytics
+  chain: multichain
+  category: Infrastructure
 tags:
   - market-data
   - wallet-analytics
@@ -26,6 +27,24 @@ tags:
 `surf` is a global CLI for querying crypto data. Run it directly (NOT via `npx surf`).
 
 **CLI flags use kebab-case** (e.g. `--sort-by`, `--token-address`), NOT snake_case.
+
+## What You Probably Got Wrong
+
+LLMs commonly make these mistakes with the Surf CLI:
+
+1. **Using snake_case flags.** Every flag is kebab-case: `--sort-by`, `--time-range`, `--token-address`. Snake_case (`--sort_by`) silently fails with "unknown flag".
+
+2. **Assuming all endpoints share the same flags.** They don't. `market-price` has `--time-range`, but `market-ranking` has `--from`/`--to`. Always check `surf <cmd> --help` first.
+
+3. **Guessing enum values.** `--indicator RSI` will fail — it's `--indicator rsi` (lowercase). The CLI validates strictly against the `--help` enum list.
+
+4. **Using `-q` instead of `--q` for search.** `-q` is a global flag (quiet mode), `--q` is the search query parameter. This mistake returns empty results with no error.
+
+5. **Writing on-chain SQL without checking the catalog.** Tables need `agent.` prefix (`agent.ethereum_dex_trades`), queries must filter on `block_date` (partition key), and there's a 30s timeout. Run `surf catalog show <table>` first.
+
+6. **Using short chain names.** `eth` doesn't work — use `ethereum`. Same for `sol` → `solana`, `arb` → `arbitrum`, `matic` → `polygon`.
+
+7. **Asking about API keys before trying.** Surf has 30 free credits/day with no auth needed. Always execute first, handle auth errors only if they occur.
 
 ## Setup
 
